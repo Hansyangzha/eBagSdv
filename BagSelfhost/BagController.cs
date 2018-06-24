@@ -34,10 +34,10 @@ namespace BagSelfhost
                 bb.bag_size = (string)dr["bag_size"];
                 bb.bag_brand_id = (string)dr["bag_brand_id"];
                 bb.bag_catergory = Convert.ToChar(dr["bag_catergory"]);
-                if (!string.IsNullOrEmpty((string)dr["bag_condition"]))
-                    bb.bag_condition = (string)dr["bag_condition"];
-                if (!string.IsNullOrEmpty((string)dr["bag_warranty"]))
-                    bb.bag_warranty = (string)dr["bag_warranty"];
+                if (!string.IsNullOrEmpty(Convert.ToString(dr["bag_condition"])))
+                    bb.bag_condition = Convert.ToString(dr["bag_condition"]);
+                if (!string.IsNullOrEmpty(Convert.ToString(dr["bag_warranty"])))
+                    bb.bag_warranty = Convert.ToString(dr["bag_warranty"]);
                 lcNames.Add(bb);
             }
             return lcNames;
