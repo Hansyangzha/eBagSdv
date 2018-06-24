@@ -72,7 +72,7 @@ namespace Bag3WinForm
 
         public string AllInfo()
         {
-            return " Order ID: " + order_id.ToString() + " \n g: " + order_bag_id + " \n g: " + order_name + " \n g: " + order_address + " \n g: " + order_phone + " \n g: " + order_date.ToShortDateString() + " \n g: $" + order_total.ToString();
+            return " Order ID: " + order_id.ToString() + " \n Bag Name: " + order_bag_id + " \n Customer: " + order_name + " \n Address: " + order_address + " \n Phone: " + order_phone + " \n Date: " + order_date.ToShortDateString() + " \n Cost: $" + order_total.ToString();
         }
     }
 }
