@@ -52,12 +52,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DTO.cs" />
-    <Compile Include="frmBag.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmBag.Designer.cs">
-      <DependentUpon>frmBag.cs</DependentUpon>
-    </Compile>
     <Compile Include="frmBag_brand.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -70,11 +64,23 @@
     <Compile Include="frmMain.Designer.cs">
       <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmNBag.cs">
+    <Compile Include="frmBagNew.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmNBag.Designer.cs">
-      <DependentUpon>frmNBag.cs</DependentUpon>
+    <Compile Include="frmBagNew.designer.cs">
+      <DependentUpon>frmBagNew.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmBagOld.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmBagOld.designer.cs">
+      <DependentUpon>frmBagOld.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmBag.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmBag.designer.cs">
+      <DependentUpon>frmBag.cs</DependentUpon>
     </Compile>
     <Compile Include="InputBox.cs">
       <SubType>Form</SubType>
@@ -85,17 +91,20 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceClient.cs" />
-    <EmbeddedResource Include="frmBag.resx">
-      <DependentUpon>frmBag.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="frmBag_brand.resx">
       <DependentUpon>frmBag_brand.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmNBag.resx">
-      <DependentUpon>frmNBag.cs</DependentUpon>
+    <EmbeddedResource Include="frmBagNew.resx">
+      <DependentUpon>frmBagNew.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmBagOld.resx">
+      <DependentUpon>frmBagOld.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmBag.resx">
+      <DependentUpon>frmBag.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="InputBox.resx">
       <DependentUpon>InputBox.cs</DependentUpon>

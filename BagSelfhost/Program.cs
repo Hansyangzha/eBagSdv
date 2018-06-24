@@ -7,7 +7,7 @@ using System.Web.Http;
 using System.Web.Http.SelfHost;
 using static System.Net.WebRequestMethods;
 
-namespace ConsoleApplication1
+namespace BagSelfhost
 {
     class Program
     {
@@ -16,7 +16,7 @@ namespace ConsoleApplication1
         static void Main(string[] args)
         {// Set up server configuration
 
-            Uri _baseAddress = new Uri("http://localhost:60069/");
+            Uri _baseAddress = new Uri("http://localhost:60064/");
 
             HttpSelfHostConfiguration config = new HttpSelfHostConfiguration(_baseAddress);
 

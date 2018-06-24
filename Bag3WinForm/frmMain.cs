@@ -7,7 +7,7 @@ namespace Bag3WinForm
     {   //Singleton
         private static readonly frmMain _Instance = new frmMain();
 
-       // private Bagbrand _BrandList = new clsBrandList();
+        private string shop_name = "Sihan Shop";
 
         public delegate void Notify(string prBagName);
 
@@ -26,69 +26,43 @@ namespace Bag3WinForm
         private void updateTitle(string prBagName)
         {
             if (!string.IsNullOrEmpty(prBagName))
-                Text = "Bag (v3 C) - " + prBagName;
+                Text = "Bags: " + prBagName;
         }
 
         public async void UpdateDisplay()
         {
             lstBrands.DataSource = null;
-
             lstBrands.DataSource = await ServiceClient.GetBrandNamesAsync();
+            lstOrders.DataSource = null;
+            lstOrders.DataSource = await ServiceClient.GetAllOrdersAsync();
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            //try
-            //{
-            //    frmBrand.Run(new clsBrand(_BrandList));
-            //}
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show(ex.Message, "Error adding new brand");
-            //}
-        }
-
-        private void lstArtists_DoubleClick(object sender, EventArgs e)
-        {
-            string lcKey;
-
-            lcKey = Convert.ToString(lstBrands.SelectedItem);
-
-            frmBag_brand._Instance.ShowDialog(lcKey);
-
-            //if (lcKey != null)
-            //    try
-            //    {
-            //        frmBrand.Run(_BrandList[lcKey]);
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        MessageBox.Show(ex.Message, "This should never occur");
-            //    }
+            try
+            {
+                frmBag_brand._Instance.ShowDialog(new clsBrand());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error adding new brand");
+            }
         }
 
         private void btnQuit_Click(object sender, EventArgs e)
         {
-            //try
-            //{
-            //    _BrandList.Save();
-            //}
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show(ex.Message, "File Save Error");
-            //}
             Close();
         }
 
-        private void btnDelete_Click(object sender, EventArgs e)
+        private async void btnDelete_Click(object sender, EventArgs e)
         {
-            string lcKey;
+            clsBrand lcKey;
 
-            lcKey = Convert.ToString(lstBrands.SelectedItem);
-            if (lcKey != null && MessageBox.Show("Are you sure?", "Deleting artist", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            lcKey = (clsBrand)lstBrands.SelectedItem;
+            if (lcKey != null && MessageBox.Show("Are you sure?", "Deleting brand", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 try
                 {
-                //    _BrandList.Remove(lcKey);
+                    MessageBox.Show(await ServiceClient.DeleteBrandAsync(lcKey.brand_name));
                     lstBrands.ClearSelected();
                     UpdateDisplay();
 
@@ -101,35 +75,59 @@ namespace Bag3WinForm
 
         private void frmMain_Load(object sender, EventArgs e)
         {
-            //try
-            //{
-            //    _BrandList = clsBrandList.RetrieveArtistList();
-
-            //}
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show(ex.Message, "File retrieve error");
-            //}
             UpdateDisplay();
-            //BagNameChanged += new Notify(updateTitle);
-            //BagNameChanged(_BrandList.GalleryName);
-            //updateTitle(_ArtistList.GalleryName);
+            BagNameChanged += new Notify(updateTitle);
+            BagNameChanged(_Instance.shop_name);
+            updateTitle(_Instance.shop_name);
         }
 
-        private void btnGalName_Click(object sender, EventArgs e)
+        private void btnRename_Click(object sender, EventArgs e)
         {
-            //_BrandList.BagName = new InputBox("Enter Bag Name:").Answer;
-            //BagNameChanged(_BrandList.GalleryName);
+            _Instance.shop_name = new InputBox("Enter Bag Store:").Answer;
+            BagNameChanged(_Instance.shop_name);
         }
 
-        private void lstArtists_SelectedIndexChanged(object sender, EventArgs e)
+        private void lstBrands_DoubleClick(object sender, EventArgs e)
         {
+            clsBrand lcKey;
 
+            lcKey = (clsBrand)lstBrands.SelectedItem;
+            frmBag_brand._Instance.ShowDialog(lcKey);
         }
 
-        private void Label1_Click(object sender, EventArgs e)
+        private async void button1_Click(object sender, EventArgs e)
         {
+            clsOrder lcKey;
 
+            lcKey = (clsOrder)lstOrders.SelectedItem;
+            if (lcKey != null && MessageBox.Show("Are you sure?", "Deleting Order", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                try
+                {
+                    MessageBox.Show(await ServiceClient.DeleteOrderAsync(lcKey));
+                    lstBrands.ClearSelected();
+                    UpdateDisplay();
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Error deleting order");
+                }
+        }
+
+        private void lstOrders_DoubleClick(object sender, EventArgs e)
+        {
+            try
+            {
+                clsOrder lcKey;
+
+                lcKey = (clsOrder)lstOrders.SelectedItem;
+
+                MessageBox.Show(lcKey.AllInfo());
+            }
+            catch (Exception ex)
+            {
+
+            }
         }
     }
 }

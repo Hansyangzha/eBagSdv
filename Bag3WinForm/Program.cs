@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace Bag3WinForm
@@ -17,8 +15,6 @@ namespace Bag3WinForm
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-           // clsBag.LoadPaintingForm = new clsBag.LoadPaintingFormDelegate(frmBag.Run);
-          //  clsbrand.LoadPhotographForm = new clsbrand.LoadPhotographFormDelegate(frmbrand.Run);
             Application.Run(frmMain.Instance);
         }
     }
